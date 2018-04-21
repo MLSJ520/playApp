@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.dao.UserDao">
+	<select id="GetUserByPhone" resultType="com.game.bean.UserBean" parameterType="String">
+	    select * from user where user_phone = #{0};
+	</select>
+    <select id="GetUserByPwd" resultType="com.game.bean.UserBean" parameterType="String">
+	    select * from user where user_phone = #{0} and user_pwd = #{1};
+	</select>
+	<insert id="Regist" parameterType="com.game.bean.UserBean" useGeneratedKeys="true" keyProperty="userId">
+	    insert into user (user_id,user_phone,user_name,user_pwd)values(#{userId},#{userPhone},#{userName},#{userPwd});
+	</insert>
+	<update id="ModifyName">
+		update user set user_name = #{1} where user_id = #{0};
+	</update>
+	<update id="ModifyPhone">
+		update user set user_phone = #{1} where user_id = #{0};
+	</update>
+	<update id="UpdateExp">
+		update user set user_exp = #{1} where user_id = #{0};
+	</update>
+	<update id="UpdateLv">
+		update user set user_lv = #{1} where user_id = #{0};
+	</update>
+
+	<select id="GetUserNum" resultType="int">
+		select user_id from user order by user_id desc limit 1;
+	</select> 
+</mapper>
